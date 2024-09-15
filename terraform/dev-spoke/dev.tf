@@ -11,7 +11,9 @@ terraform {
     container_name       = "tfstate"
     key                  = "terraform.tfstate"
     subscription_id      = "5f222019-262e-4d97-95ab-fe37f46e323d"
-    use_azuread_auth     = true
+    use_oidc             = true
+    client_id            = "3eff7aae-2d36-441e-b1bd-66d85ac0486d"
+    tenant_id            = "0801ae25-cd3e-47b8-be89-59091b6a29b1"
   }
 }
 
