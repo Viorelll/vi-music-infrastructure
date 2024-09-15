@@ -23,5 +23,5 @@ resource "azurerm_key_vault_secret" "sqldb_admin_password" {
 resource "azurerm_key_vault_secret" "sqldb_connection_string_viqupapp" {
   name         = "sqldb-connectionstring"
   key_vault_id = azurerm_key_vault.this.id
-  value        = "postgres://${var.sqldb_admin_username}:${azurerm_key_vault.this.name}${azurerm_postgresql_flexible_server.server.name}:5432"
+  value        = "Server=${azurerm_postgresql_flexible_server.server.name};Database=${azurerm_postgresql_flexible_server_database.db.name};Port=5432;User Id=${var.sqldb_admin_username};Password=${azurerm_postgresql_flexible_server.server.administrator_password};Ssl Mode=Require;"
 }
