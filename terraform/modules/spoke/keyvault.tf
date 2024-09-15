@@ -20,8 +20,8 @@ resource "azurerm_key_vault_secret" "sqldb_admin_password" {
   depends_on   = [azurerm_role_assignment.terraform_keyvault_admin]
 }
 
-resource "azurerm_key_vault_secret" "sqldb_connection_string_viqupapp" {
-  name         = "sqldb-connectionstring"
-  key_vault_id = azurerm_key_vault.this.id
-  value        = "postgres://${var.sqldb_admin_username}:${azurerm_key_vault.this.name}${azurerm_postgresql_flexible_server.server.name}:5432"
-}
+# resource "azurerm_key_vault_secret" "sqldb_connection_string_viqupapp" {
+#   name         = "sqldb-connectionstring"
+#   key_vault_id = azurerm_key_vault.this.id
+#   value        = "postgres://${var.sqldb_admin_username}:${azurerm_key_vault.this.name}${azurerm_postgresql_flexible_server.server.name}:5432"
+# }
