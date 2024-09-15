@@ -5,13 +5,13 @@ terraform {
       version = "3.103.1"
     }
   }
-  # backend "azurerm" {
-  #   resource_group_name  = "tf-state-rg"
-  #   storage_account_name = "tfstateviqub"
-  #   container_name       = "tfstate"
-  #   key                  = "terraform.tfstate"
-  #   subscription_id      = "5f222019-262e-4d97-95ab-fe37f46e323d"
-  # }
+  backend "azurerm" {
+    resource_group_name  = "tf-state-rg"
+    storage_account_name = "tfstateviqub"
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
+    subscription_id      = "5f222019-262e-4d97-95ab-fe37f46e323d"
+  }
 }
 
 provider "azurerm" {
