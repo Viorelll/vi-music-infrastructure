@@ -20,16 +20,16 @@ provider "azurerm" {
   features {}
 }
 
-# resource "rg-viqubapp-dev-ne" "example" {
-#   name     = "rg-viqubapp-dev-ne"
+# resource "rg-viqubapp-prod-ne" "example" {
+#   name     = "rg-viqubapp-prod-ne"
 #   location = "ne"
 # }
 
 
 module "spoke" {
   source                 = "../modules/spoke"
-  resource_group_name    = "rg-viqubapp-dev-ne"
-  environment_name       = "dev"
+  resource_group_name    = "rg-viqubapp-prod-ne"
+  environment_name       = "prod"
   application_name       = "viqubapp"
   region_identifier      = "ne"
   aspnetcore_environment = "Development"
