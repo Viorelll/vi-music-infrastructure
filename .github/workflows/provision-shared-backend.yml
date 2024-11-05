@@ -1,5 +1,7 @@
 name: Provision - Init - Shared Backend (run ones)
 
+# Create storage account for saving shared tfstate
+
 on:
   workflow_dispatch:
 

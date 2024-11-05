@@ -1,5 +1,8 @@
 name: Provision - Shared
 
+# Create shared container registry
+# Create storage container for X-environment
+
 on:
   workflow_dispatch:
 
