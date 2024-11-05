@@ -1,4 +1,4 @@
-name: Provision - DEV
+name: Provision - TEST - used just for test without backend state
 
 on:
   workflow_dispatch:
