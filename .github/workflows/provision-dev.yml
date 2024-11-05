@@ -1,4 +1,4 @@
-name: Provision Monolith Dev
+name: Provision - DEV
 
 on:
   workflow_dispatch:
@@ -7,15 +7,15 @@ jobs:
   terraform-plan:
     uses: viorelll/vi-music-infrastructure/.github/workflows/terraform-plan.yml@main
     with:
-      working-directory: terraform/dev-spoke
-      environment: monolith-dev
+      working-directory: terraform/dev
+      environment: dev
       plan-artifact-name: tfplan
     secrets: inherit
   terraform-apply:
     uses: viorelll/vi-music-infrastructure/.github/workflows/terraform-apply.yml@main
     needs: terraform-plan
     with:
-      working-directory: terraform/dev-spoke
-      environment: monolith-dev
+      working-directory: terraform/dev
+      environment: dev
       plan-artifact-name: tfplan
     secrets: inherit
