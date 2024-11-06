@@ -6,12 +6,6 @@ on:
       working-directory:
         required: true
         type: string
-      plan-artifact-name:
-        required: true
-        type: string
-      environment:
-        required: true
-        type: string
 jobs:
   terraform:
     environment: ${{ inputs.environment }}
