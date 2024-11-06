@@ -14,6 +14,7 @@ terraform {
     client_secret        = var.client_secret   # use ARM_CLIENT_SECRET
     tenant_id            = var.tenant_id       # use ARM_TENANT_ID
     subscription_id      = var.subscription_id # use ARM_SUBSCRIPTION_ID
+    access_key           = var.access_key
   }
 }
 

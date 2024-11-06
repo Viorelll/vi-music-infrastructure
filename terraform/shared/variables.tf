@@ -51,3 +51,10 @@ variable "subscription_id" {
   type        = string
   sensitive   = true
 }
+
+
+variable "access_key" {
+  description = "Azure storage account access key"
+  type        = string
+  sensitive   = true
+}
