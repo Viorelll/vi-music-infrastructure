@@ -28,26 +28,26 @@
 # }
 
 
-# variable "client_id" {
-#   description = "The client ID of the Azure Service Principal"
-#   type        = string
-#   sensitive   = true
-# }
+variable "client_id" {
+  description = "The client ID of the Azure Service Principal"
+  type        = string
+  sensitive   = true
+}
 
-# variable "client_secret" {
-#   description = "The client secret of the Azure Service Principal"
-#   type        = string
-#   sensitive   = true
-# }
+variable "client_secret" {
+  description = "The client secret of the Azure Service Principal"
+  type        = string
+  sensitive   = true
+}
 
-# variable "tenant_id" {
-#   description = "The tenant ID of the Azure account"
-#   type        = string
-#   sensitive   = true
-# }
+variable "tenant_id" {
+  description = "The tenant ID of the Azure account"
+  type        = string
+  sensitive   = true
+}
 
-# variable "subscription_id" {
-#   description = "The subscription ID of the Azure account"
-#   type        = string
-#   sensitive   = true
-# }
+variable "subscription_id" {
+  description = "The subscription ID of the Azure account"
+  type        = string
+  sensitive   = true
+}
