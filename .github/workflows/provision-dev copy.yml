@@ -2,6 +2,16 @@ name: Provision - BACKEND
 
 on:
   workflow_call:
+    inputs:
+      working-directory:
+        required: true
+        type: string
+      plan-artifact-name:
+        required: true
+        type: string
+      environment:
+        required: true
+        type: string
     secrets:
       ARM_CLIENT_ID:
         required: true
@@ -13,9 +23,17 @@ on:
         required: true
       ARM_ACCESS_KEY:
         required: true
-
 jobs:
   terraform:
+    environment: ${{ inputs.environment }}
+
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      ARM_ACCESS_KEY: ${{ secrets.ARM_ACCESS_KEY }}
+
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
