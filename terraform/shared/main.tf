@@ -10,10 +10,10 @@ terraform {
     storage_account_name = "stviqubsharedwe02"
     container_name       = "tfstateshared"
     key                  = "terraform.tfstate"
-    client_id            = var.client_id       # use ARM_CLIENT_ID
-    client_secret        = var.client_secret   # use ARM_CLIENT_SECRET
-    tenant_id            = var.tenant_id       # use ARM_TENANT_ID
-    subscription_id      = var.subscription_id # use ARM_SUBSCRIPTION_ID
+    # client_id            = var.client_id       # use ARM_CLIENT_ID
+    # client_secret        = var.client_secret   # use ARM_CLIENT_SECRET
+    # tenant_id            = var.tenant_id       # use ARM_TENANT_ID
+    # subscription_id      = var.subscription_id # use ARM_SUBSCRIPTION_ID
   }
 }
 

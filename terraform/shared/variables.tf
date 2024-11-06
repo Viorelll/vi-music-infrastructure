@@ -27,27 +27,27 @@
 #   dev_container_app_name             = "ca-${var.application_name}-api-${var.dev_identifier}-${var.region_identifier}-01"
 # }
 
-# variables.tf
-variable "client_id" {
-  description = "The client ID of the Azure Service Principal"
-  type        = string
-  sensitive   = true
-}
 
-variable "client_secret" {
-  description = "The client secret of the Azure Service Principal"
-  type        = string
-  sensitive   = true
-}
+# variable "client_id" {
+#   description = "The client ID of the Azure Service Principal"
+#   type        = string
+#   sensitive   = true
+# }
 
-variable "tenant_id" {
-  description = "The tenant ID of the Azure account"
-  type        = string
-  sensitive   = true
-}
+# variable "client_secret" {
+#   description = "The client secret of the Azure Service Principal"
+#   type        = string
+#   sensitive   = true
+# }
 
-variable "subscription_id" {
-  description = "The subscription ID of the Azure account"
-  type        = string
-  sensitive   = true
-}
+# variable "tenant_id" {
+#   description = "The tenant ID of the Azure account"
+#   type        = string
+#   sensitive   = true
+# }
+
+# variable "subscription_id" {
+#   description = "The subscription ID of the Azure account"
+#   type        = string
+#   sensitive   = true
+# }
