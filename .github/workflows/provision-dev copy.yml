@@ -1,7 +1,7 @@
 name: Provision - BACKEND
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       working-directory:
         required: true
@@ -12,17 +12,6 @@ on:
       environment:
         required: true
         type: string
-    secrets:
-      ARM_CLIENT_ID:
-        required: true
-      ARM_CLIENT_SECRET:
-        required: true
-      ARM_SUBSCRIPTION_ID:
-        required: true
-      ARM_TENANT_ID:
-        required: true
-      ARM_ACCESS_KEY:
-        required: true
 jobs:
   terraform:
     environment: ${{ inputs.environment }}
