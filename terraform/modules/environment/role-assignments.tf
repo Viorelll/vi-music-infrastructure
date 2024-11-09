@@ -8,16 +8,15 @@ resource "azurerm_role_assignment" "terraform_keyvault_admin" {
 }
 
 # Terraform user as App Configuration Data Owner so it can create app config keys 
-# resource "azurerm_role_assignment" "terraform_app_config_admin" {
-#   scope                = azurerm_app_configuration.this.id
-#   role_definition_name = "App Configuration Data Owner"
-#   principal_id         = data.azurerm_client_config.current.object_id
-# }
+resource "azurerm_role_assignment" "terraform_app_config_admin" {
+  scope                = azurerm_app_configuration.this.id
+  role_definition_name = "App Configuration Data Owner"
+  principal_id         = data.azurerm_client_config.current.object_id
+}
 
 #############################################################################
 
 # Terraform user as keyvault reader ???????????????????(above is assign as owner)
-
 # resource "azurerm_role_assignment" "terraform_keyvault_user" {
 #   scope                = azurerm_key_vault.this.id
 #   role_definition_name = "Key Vault Reader"
@@ -42,6 +41,7 @@ resource "azurerm_role_assignment" "container_apps_appconfig" {
 
 
 # Access for container apps identity to pull images from container registry
+# ASSIGN THIS ROLES IS POSSIBLE IF TERRAFORM APP REGISTRATION IS OWNER IN SHARED_CONTAINER_REGISTRY
 resource "azurerm_role_assignment" "container_apps_container_registry" {
   scope                = data.azurerm_container_registry.shared.id
   role_definition_name = "acrpull"

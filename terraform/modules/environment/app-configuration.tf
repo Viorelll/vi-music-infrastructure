@@ -16,9 +16,9 @@ resource "azurerm_app_configuration_key" "app_config_keys" {
   type                   = each.value.type
 }
 
-# resource "azurerm_app_configuration_key" "db_connection_string" {
-#   configuration_store_id = azurerm_app_configuration.this.id
-#   key                    = "ConnectionStrings:PostgresConnection"
-#   vault_key_reference    = azurerm_key_vault_secret.sqldb_connection_string_viqupapp.versionless_id
-#   type                   = "vault"
-# }
+resource "azurerm_app_configuration_key" "db_connection_string" {
+  configuration_store_id = azurerm_app_configuration.this.id
+  key                    = "ConnectionStrings:PostgresConnection"
+  vault_key_reference    = azurerm_key_vault_secret.sqldb_connection_string_viqupapp.versionless_id
+  type                   = "vault"
+}
