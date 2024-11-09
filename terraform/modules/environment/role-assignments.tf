@@ -1,4 +1,4 @@
-### ASIGN KEY VAULT ADMINISTRATOR & APP CONFIGURATION DATA OWNER FOR TERRAFORM APPLY USER (LOCAL SING IN USER/TERRAFORM APP REGISTRATION)
+### ASIGN KEY VAULT ADMINISTRATOR & APP CONFIGURATION DATA OWNER FOR TERRAFORM APPLY USER (LOCAL SIGN IN USER/TERRAFORM APP REGISTRATION)
 # Terraform user as keyvault admin
 resource "azurerm_role_assignment" "terraform_keyvault_admin" {
   scope                = azurerm_key_vault.this.id
@@ -16,14 +16,15 @@ resource "azurerm_role_assignment" "terraform_app_config_admin" {
 #############################################################################
 
 # Terraform user as keyvault reader ???????????????????(above is assign as owner)
-resource "azurerm_role_assignment" "terraform_keyvault_user" {
-  scope                = azurerm_key_vault.this.id
-  role_definition_name = "Key Vault Reader"
-  principal_id         = data.azurerm_client_config.current.object_id
-}
+
+# resource "azurerm_role_assignment" "terraform_keyvault_user" {
+#   scope                = azurerm_key_vault.this.id
+#   role_definition_name = "Key Vault Reader"
+#   principal_id         = data.azurerm_client_config.current.object_id
+# }
 
 
-### Set roles for idenity service principal
+### Set roles for Managed Identity (UAI)
 # Access for container apps to read keyvault
 resource "azurerm_role_assignment" "container_apps_keyvault" {
   scope                = azurerm_key_vault.this.id
