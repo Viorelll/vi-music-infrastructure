@@ -1,13 +1,13 @@
 
 
-# resource "azurerm_container_app_environment" "this" {
-#   name                           = "cae-${var.application_name}-${var.environment_name}-${var.region_identifier}-01"
-#   resource_group_name            = data.azurerm_resource_group.this.name
-#   location                       = data.azurerm_resource_group.this.location
-#   log_analytics_workspace_id     = azurerm_log_analytics_workspace.this.id
-#   infrastructure_subnet_id       = azurerm_subnet.container_app_environment.id
-#   internal_load_balancer_enabled = true
-# }
+resource "azurerm_container_app_environment" "this" {
+  name                           = "cae-${var.application_name}-${var.environment_name}-${var.region_identifier}-01"
+  resource_group_name            = data.azurerm_resource_group.this.name
+  location                       = data.azurerm_resource_group.this.location
+  log_analytics_workspace_id     = azurerm_log_analytics_workspace.this.id
+  infrastructure_subnet_id       = azurerm_subnet.container_app_environment.id
+  internal_load_balancer_enabled = true
+}
 
 # Managed identity for container apps
 resource "azurerm_user_assigned_identity" "container_apps" {
