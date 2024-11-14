@@ -16,76 +16,76 @@ resource "azurerm_user_assigned_identity" "container_apps" {
   resource_group_name = data.azurerm_resource_group.this.name
 }
 
-# # Api container
-# resource "azurerm_container_app" "api" {
-#   name                         = "ca-${var.application_name}-api-${var.environment_name}-${var.region_identifier}-01"
-#   container_app_environment_id = azurerm_container_app_environment.this.id
-#   resource_group_name          = data.azurerm_resource_group.this.name
-#   revision_mode                = "Single"
+# Api container
+resource "azurerm_container_app" "api" {
+  name                         = "ca-${var.application_name}-api-${var.environment_name}-${var.region_identifier}-01"
+  container_app_environment_id = azurerm_container_app_environment.this.id
+  resource_group_name          = data.azurerm_resource_group.this.name
+  revision_mode                = "Single"
 
-#   lifecycle {
-#     # These things get updated by the ci/cd system when we deploy a new container.
-#     ignore_changes = [
-#       template[0].container[0].image
-#     ]
-#   }
+  lifecycle {
+    # These things get updated by the ci/cd system when we deploy a new container.
+    ignore_changes = [
+      template[0].container[0].image
+    ]
+  }
 
-#   identity {
-#     type         = "UserAssigned"
-#     identity_ids = [azurerm_user_assigned_identity.container_apps.id]
-#   }
+  identity {
+    type         = "UserAssigned"
+    identity_ids = [azurerm_user_assigned_identity.container_apps.id]
+  }
 
-#   registry {
-#     server   = data.azurerm_container_registry.shared.login_server
-#     identity = azurerm_user_assigned_identity.container_apps.id
-#   }
+  registry {
+    server   = data.azurerm_container_registry.shared.login_server
+    identity = azurerm_user_assigned_identity.container_apps.id
+  }
 
-#   template {
-#     max_replicas = var.api_container_max_replicas
-#     min_replicas = var.api_container_min_replicas
+  template {
+    max_replicas = var.api_container_max_replicas
+    min_replicas = var.api_container_min_replicas
 
-#     dynamic "http_scale_rule" {
-#       for_each = { for http_scale_rule in var.api_http_scale_rules : http_scale_rule.name => http_scale_rule }
-#       content {
-#         name                = http_scale_rule.value.name
-#         concurrent_requests = http_scale_rule.value.concurrent_requests
-#       }
-#     }
+    dynamic "http_scale_rule" {
+      for_each = { for http_scale_rule in var.api_http_scale_rules : http_scale_rule.name => http_scale_rule }
+      content {
+        name                = http_scale_rule.value.name
+        concurrent_requests = http_scale_rule.value.concurrent_requests
+      }
+    }
 
-#     container {
-#       name   = "api-001"
-#       image  = "${data.azurerm_container_registry.shared.login_server}/monolith-backend-api:latest" # Point to ACR image ### Manual changes (done outside of terraform) are ingored. No need to change this line.
-#       cpu    = var.api_container_cpu
-#       memory = var.api_container_memory
+    container {
+      name   = "api-001"
+      image  = "${data.azurerm_container_registry.shared.login_server}/monolith-backend-api:latest" # Point to ACR image ### Manual changes (done outside of terraform) are ingored. No need to change this line.
+      cpu    = var.api_container_cpu
+      memory = var.api_container_memory
 
-#       env {
-#         name  = "AZURE_CLIENT_ID" # Required for user assigned managed identity
-#         value = azurerm_user_assigned_identity.container_apps.client_id
-#       }
+      env {
+        name  = "AZURE_CLIENT_ID" # Required for user assigned managed identity
+        value = azurerm_user_assigned_identity.container_apps.client_id
+      }
 
-#       env {
-#         name  = "AppConfigEndpoint"
-#         value = azurerm_app_configuration.this.endpoint
-#       }
+      env {
+        name  = "AppConfigEndpoint"
+        value = azurerm_app_configuration.this.endpoint
+      }
 
-#       env {
-#         name  = "ASPNETCORE_ENVIRONMENT"
-#         value = var.aspnetcore_environment
-#       }
-#     }
-#   }
+      env {
+        name  = "ASPNETCORE_ENVIRONMENT"
+        value = var.aspnetcore_environment
+      }
+    }
+  }
 
-#   ingress {
-#     allow_insecure_connections = false
-#     target_port                = 80
-#     external_enabled           = true # Since it's an internal environment, we only allow access from the vnet.
+  ingress {
+    allow_insecure_connections = false
+    target_port                = 80
+    external_enabled           = true # Since it's an internal environment, we only allow access from the vnet.
 
-#     traffic_weight {
-#       percentage      = 100
-#       latest_revision = true
-#       label           = "latest"
-#     }
-#   }
+    traffic_weight {
+      percentage      = 100
+      latest_revision = true
+      label           = "latest"
+    }
+  }
 
-#   # depends_on = [azurerm_role_assignment.container_apps_container_registry]
-# }
+  # depends_on = [azurerm_role_assignment.container_apps_container_registry]
+}
