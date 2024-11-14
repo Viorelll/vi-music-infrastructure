@@ -27,7 +27,7 @@ provider "azurerm" {
 
 module "environment" {
   source                 = "../modules/environment"
-  resource_group_name    = "rg-viqub-dev-we-01"
+  resource_group_name    = "rg-viqub-dev-we-02"
   environment_name       = "dev"
   application_name       = "viqub"
   region_identifier      = "we"
