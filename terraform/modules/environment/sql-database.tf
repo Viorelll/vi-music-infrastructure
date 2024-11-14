@@ -1,12 +1,11 @@
 locals {
-  ci_cd_username    = "ci_cd_user"
-  region_identifier = "gwc"
+  ci_cd_username = "ci_cd_user"
 }
 
 resource "azurerm_postgresql_flexible_server" "server" {
-  name                   = "sql-${var.application_name}-${var.environment_name}-${local.region_identifier}"
+  name                   = "sql-${var.application_name}-${var.environment_name}-${var.region_identifier}"
   resource_group_name    = data.azurerm_resource_group.this.name
-  location               = local.region_identifier
+  location               = var.region_full_identifier
   administrator_login    = var.sqldb_admin_username
   administrator_password = random_password.sqldb_admin_password.result
   version                = "16"

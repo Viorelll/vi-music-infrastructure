@@ -14,6 +14,10 @@ variable "region_identifier" {
   type = string
 }
 
+variable "region_full_identifier" {
+  type = string
+}
+
 variable "aspnetcore_environment" {
   type = string
 }
