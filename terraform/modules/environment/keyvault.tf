@@ -17,8 +17,6 @@ resource "azurerm_key_vault_secret" "sqldb_admin_password" {
   name         = "sqldb-admin-password"
   key_vault_id = azurerm_key_vault.this.id
   value        = random_password.sqldb_admin_password.result
-
-  depends_on = [azurerm_role_assignment.terraform_keyvault_admin]
 }
 
 # resource "azurerm_key_vault_secret" "sqldb_connection_string_viqupapp" {
