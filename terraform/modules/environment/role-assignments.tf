@@ -7,12 +7,12 @@ resource "azurerm_role_assignment" "terraform_keyvault_admin" {
   principal_id         = data.azurerm_client_config.current.object_id
 }
 
-# Terraform user as App Configuration Data Owner so it can create app config keys 
-resource "azurerm_role_assignment" "terraform_app_config_admin" {
-  scope                = azurerm_app_configuration.this.id
-  role_definition_name = "App Configuration Data Owner"
-  principal_id         = data.azurerm_client_config.current.object_id
-}
+# # Terraform user as App Configuration Data Owner so it can create app config keys 
+# resource "azurerm_role_assignment" "terraform_app_config_admin" {
+#   scope                = azurerm_app_configuration.this.id
+#   role_definition_name = "App Configuration Data Owner"
+#   principal_id         = data.azurerm_client_config.current.object_id
+# }
 
 #############################################################################
 
