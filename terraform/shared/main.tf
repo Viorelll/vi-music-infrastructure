@@ -6,8 +6,8 @@ terraform {
     }
   }
   backend "azurerm" {
-    resource_group_name  = "rg-viqub-shared-gwc-01"
-    storage_account_name = "stviqubsharedgwc02"
+    resource_group_name  = "rg-vimusic-shared-gwc-01"
+    storage_account_name = "stvimusicsharedgwc02"
     container_name       = "tfstateshared"
     key                  = "terraform.tfstate"
   }

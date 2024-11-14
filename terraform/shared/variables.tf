@@ -1,6 +1,6 @@
 variable "application_name" {
   type    = string
-  default = "viqub"
+  default = "vimusic"
 }
 
 variable "region_identifier" {
