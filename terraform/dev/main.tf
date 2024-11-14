@@ -30,7 +30,7 @@ module "environment" {
   resource_group_name    = "rg-vimusic-dev-gwc-01"
   environment_name       = "dev"
   application_name       = "vimusic"
-  region_identifier      = "gwc"
+  region_identifier      = "germanywestcentral"
   aspnetcore_environment = "Development"
 
   shared_resource_group_name     = "rg-vimusic-shared-gwc-01"
