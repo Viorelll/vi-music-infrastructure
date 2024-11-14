@@ -5,7 +5,7 @@ variable "application_name" {
 
 variable "region_identifier" {
   type    = string
-  default = "we"
+  default = "gwc"
 }
 
 variable "shared_identifier" {

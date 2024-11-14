@@ -1,6 +1,6 @@
 locals {
   ci_cd_username    = "ci_cd_user"
-  region_identifier = "uksouth"
+  region_identifier = "gwc"
 }
 
 resource "azurerm_postgresql_flexible_server" "server" {
