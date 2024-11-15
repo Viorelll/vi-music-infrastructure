@@ -81,7 +81,7 @@ resource "azurerm_application_gateway" "dev" {
   probe {
     host                = data.azurerm_container_app.api_dev_01.ingress[0].fqdn
     name                = local.api_dev_01.probe_name
-    protocol            = "Https"
+    protocol            = "Http" //"Https"
     path                = "/health"
     interval            = 30
     timeout             = 30
@@ -96,8 +96,8 @@ resource "azurerm_application_gateway" "dev" {
     name                  = local.api_dev_01.backend_http_settings_name
     cookie_based_affinity = "Disabled"
     path                  = "/"
-    port                  = 443
-    protocol              = "Https"
+    port                  = 80     //443
+    protocol              = "Http" //"Https"
     request_timeout       = 60
     host_name             = data.azurerm_container_app.api_dev_01.ingress[0].fqdn
     probe_name            = local.api_dev_01.probe_name
