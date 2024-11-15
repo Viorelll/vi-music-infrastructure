@@ -109,9 +109,10 @@ resource "azurerm_application_gateway" "dev" {
     name                           = local.api_dev_01.http_listener_name
     frontend_ip_configuration_name = local.frontend_ip_configuration_name
     frontend_port_name             = local.frontend_port_name
-    protocol                       = "Https"
-    ssl_certificate_name           = local.api_dev_01.ssl_certificate_name
-    host_name                      = "billingapi-dev.brabo.com"
+    protocol                       = "Http"
+    //protocol                       = "Https"
+    //ssl_certificate_name           = local.api_dev_01.ssl_certificate_name
+    //host_name                      = ""
   }
 
   request_routing_rule {
