@@ -38,7 +38,7 @@ module "environment" {
   shared_container_registry_name = "crvimusicsharedgwc02"
 
   vnet_name                            = "vnet-vimusic-dev-gwc-01"
-  vnet_address                         = "10.0.0.0/16"
+  vnet_address                         = "10.0.4.0/22" //1024 ip's  //"10.0.0.0/16"
   container_apps_subnet_address_prefix = "10.0.4.0/22"
   api_container_min_replicas           = 1
   api_container_max_replicas           = 1
