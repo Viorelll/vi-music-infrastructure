@@ -18,3 +18,9 @@ provider "azurerm" {
   features {}
 }
 
+provider "azurerm" {
+  alias           = "dev_subscription"
+  subscription_id = "4547b264-f1ab-4b5a-8e37-fd20926e38eb"
+  features {}
+}
+

@@ -18,6 +18,16 @@ variable "dev_identifier" {
   default = "dev"
 }
 
+variable "vnet_name" {
+  type    = string
+  default = "vnet-vimusic-shared-gwc-01"
+}
+
+variable "vnet_ip_address" {
+  type    = string
+  default = "10.0.20.0"
+}
+
 locals {
   shared_resource_group_name  = "rg-${var.application_name}-${var.shared_identifier}-${var.region_identifier}-01"
   shared_storage_account_name = "st${var.application_name}${var.shared_identifier}${var.region_identifier}02"
