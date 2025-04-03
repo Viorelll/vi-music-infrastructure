@@ -6,8 +6,8 @@ terraform {
     }
   }
   backend "azurerm" {
-    resource_group_name  = "rg-vimusic-shared-gwc-01"
-    storage_account_name = "stvimusicsharedgwc02"
+    resource_group_name  = "rg-vimusic-shared-plc-01"
+    storage_account_name = "stvimusicsharedplc02"
     container_name       = "tfstatevimusicdev"
     key                  = "terraform.tfstate"
     subscription_id      = "8e6b06a1-86b9-42bd-8971-45b0d844b544"
@@ -27,17 +27,17 @@ provider "azurerm" {
 
 module "environment" {
   source                 = "../modules/environment"
-  resource_group_name    = "rg-vimusic-dev-gwc-01"
+  resource_group_name    = "rg-vimusic-dev-plc-01"
   environment_name       = "dev"
   application_name       = "vimusic"
-  region_identifier      = "gwc"
+  region_identifier      = "plc"
   region_full_identifier = "germanywestcentral"
   aspnetcore_environment = "Development"
 
-  shared_resource_group_name     = "rg-vimusic-shared-gwc-01"
-  shared_container_registry_name = "crvimusicsharedgwc02"
+  shared_resource_group_name     = "rg-vimusic-shared-plc-01"
+  shared_container_registry_name = "crvimusicsharedplc02"
 
-  vnet_name                            = "vnet-vimusic-dev-gwc-01"
+  vnet_name                            = "vnet-vimusic-dev-plc-01"
   vnet_address                         = "10.0.4.0/22" //1024 ip's  //"10.0.0.0/16"
   container_apps_subnet_address_prefix = "10.0.4.0/22"
   api_container_min_replicas           = 1
