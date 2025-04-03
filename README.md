@@ -2,6 +2,7 @@
 Infra for ViMusic App
 
 How to setup infra:
+
 0) **Run** --- Register 'Microsoft.App' into Resource providers in Azure Subscription
 1) **Run** --- Provision - Init - Shared Backend (run ones) [Creating storage account for store shared state]
 2) **Run** --- Provision - Shared [Creating shared infra like Container registry, Container for state in storage account]
