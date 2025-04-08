@@ -54,7 +54,7 @@ resource "azurerm_container_app" "api" {
 
     container {
       name   = "api-001"
-      image  = "${data.azurerm_container_registry.shared.login_server}/monolith-backend-api:latest" # Point to ACR image ### Manual changes (done outside of terraform) are ingored. No need to change this line.
+      image  = "mcr.microsoft.com/k8se/quickstart:latest" # "${data.azurerm_container_registry.shared.login_server}/monolith-backend-api:latest" # Point to ACR image ### Manual changes (done outside of terraform) are ingored. No need to change this line.
       cpu    = var.api_container_cpu
       memory = var.api_container_memory
 

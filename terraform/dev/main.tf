@@ -31,7 +31,7 @@ module "environment" {
   environment_name       = "dev"
   application_name       = "vimusic"
   region_identifier      = "plc"
-  region_full_identifier = "germanywestcentral"
+  region_full_identifier = "polandcentral"
   aspnetcore_environment = "Development"
 
   shared_resource_group_name     = "rg-vimusic-shared-plc-01"

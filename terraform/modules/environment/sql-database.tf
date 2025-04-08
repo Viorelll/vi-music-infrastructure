@@ -3,7 +3,7 @@ locals {
 }
 
 resource "azurerm_postgresql_flexible_server" "server" {
-  name                   = "sql-${var.application_name}-${var.environment_name}-${var.region_identifier}"
+  name                   = "sql-${var.application_name}-${var.environment_name}-${var.region_identifier}-01"
   resource_group_name    = data.azurerm_resource_group.this.name
   location               = var.region_full_identifier
   administrator_login    = var.sqldb_admin_username
