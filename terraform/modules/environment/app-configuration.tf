@@ -21,6 +21,4 @@ resource "azurerm_app_configuration_key" "db_connection_string" {
   key                    = "ConnectionStrings:PostgresConnection"
   vault_key_reference    = azurerm_key_vault_secret.sqldb_connection_string_viqupapp.versionless_id
   type                   = "vault"
-
-  depends_on = [azurerm_key_vault_secret.sqldb_connection_string_viqupapp] #wait until the key vault secret will be created
 }
