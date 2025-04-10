@@ -21,4 +21,6 @@ resource "azurerm_app_configuration_key" "db_connection_string" {
   key                    = "ConnectionStrings:PostgresConnection"
   vault_key_reference    = azurerm_key_vault_secret.sqldb_connection_string_viqupapp.versionless_id
   type                   = "vault"
+
+  depends_on = [azurerm_role_assignment.terraform_keyvault_admin] #wait until the role for creating new secret will be assigned
 }
