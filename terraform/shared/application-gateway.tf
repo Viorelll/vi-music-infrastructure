@@ -30,8 +30,8 @@ resource "azurerm_user_assigned_identity" "app_gateway_dev" {
 
 locals {
   frontend_ip_configuration_name = "default"
-  frontend_port_name             = "http" //"https"
-  frontend_port                  = 80     //443
+  frontend_port_name             = "https"
+  frontend_port                  = 443
 
   api_dev_01 = {
     probe_name                 = "${var.application_name}-api-${var.dev_identifier}-${var.region_identifier}-01"
@@ -81,7 +81,7 @@ resource "azurerm_application_gateway" "dev" {
   probe {
     host                = data.azurerm_container_app.api_dev_01.ingress[0].fqdn
     name                = local.api_dev_01.probe_name
-    protocol            = "Http" //"Https"
+    protocol            = "Https"
     path                = "/health"
     interval            = 30
     timeout             = 30
@@ -96,8 +96,8 @@ resource "azurerm_application_gateway" "dev" {
     name                  = local.api_dev_01.backend_http_settings_name
     cookie_based_affinity = "Disabled"
     path                  = "/"
-    port                  = 443     //443
-    protocol              = "Https" //"Https"
+    port                  = 443
+    protocol              = "Https"
     request_timeout       = 60
     host_name             = data.azurerm_container_app.api_dev_01.ingress[0].fqdn
     probe_name            = local.api_dev_01.probe_name
@@ -110,7 +110,6 @@ resource "azurerm_application_gateway" "dev" {
     frontend_ip_configuration_name = local.frontend_ip_configuration_name
     frontend_port_name             = local.frontend_port_name
     protocol                       = "Https"
-    //protocol                       = "Https"
     //ssl_certificate_name           = local.api_dev_01.ssl_certificate_name
     //host_name                      = ""
   }
