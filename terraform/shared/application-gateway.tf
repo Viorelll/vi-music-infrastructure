@@ -34,11 +34,11 @@ locals {
   frontend_port                  = 80     //443
 
   api_dev_01 = {
-    probe_name                 = "${var.application_name}-api-dev-we-01"
-    backend_address_pool_name  = "${var.application_name}-api-dev-we-01"
-    backend_http_settings_name = "${var.application_name}-api-dev-we-01"
-    http_listener_name         = "${var.application_name}-api-dev-we-01"
-    ssl_certificate_name       = "${var.application_name}-api-dev-we-01"
+    probe_name                 = "${var.application_name}-api-${var.dev_identifier}-${var.region_identifier}-01"
+    backend_address_pool_name  = "${var.application_name}-api-${var.dev_identifier}-${var.region_identifier}-01"
+    backend_http_settings_name = "${var.application_name}-api-${var.dev_identifier}-${var.region_identifier}-01"
+    http_listener_name         = "${var.application_name}-api-${var.dev_identifier}-${var.region_identifier}-01"
+    ssl_certificate_name       = "${var.application_name}-api-${var.dev_identifier}-${var.region_identifier}-01"
   }
 }
 
@@ -96,8 +96,8 @@ resource "azurerm_application_gateway" "dev" {
     name                  = local.api_dev_01.backend_http_settings_name
     cookie_based_affinity = "Disabled"
     path                  = "/"
-    port                  = 80     //443
-    protocol              = "Http" //"Https"
+    port                  = 443     //443
+    protocol              = "Https" //"Https"
     request_timeout       = 60
     host_name             = data.azurerm_container_app.api_dev_01.ingress[0].fqdn
     probe_name            = local.api_dev_01.probe_name
@@ -109,14 +109,14 @@ resource "azurerm_application_gateway" "dev" {
     name                           = local.api_dev_01.http_listener_name
     frontend_ip_configuration_name = local.frontend_ip_configuration_name
     frontend_port_name             = local.frontend_port_name
-    protocol                       = "Http"
+    protocol                       = "Https"
     //protocol                       = "Https"
     //ssl_certificate_name           = local.api_dev_01.ssl_certificate_name
     //host_name                      = ""
   }
 
   request_routing_rule {
-    name                       = "${var.application_name}-api-dev-001"
+    name                       = "${var.application_name}-api-${var.dev_identifier}-001"
     rule_type                  = "Basic"
     http_listener_name         = local.api_dev_01.http_listener_name
     backend_address_pool_name  = local.api_dev_01.backend_address_pool_name
