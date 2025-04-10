@@ -1,33 +1,3 @@
-resource "azurerm_public_ip" "application_gateway" {
-  name                = "pip-${var.application_name}-${var.shared_identifier}-${var.region_identifier}-01"
-  resource_group_name = data.azurerm_resource_group.shared_resource.name
-  location            = data.azurerm_resource_group.shared_resource.location
-  allocation_method   = "Static"
-  sku                 = "Standard"
-}
-
-resource "azurerm_virtual_network" "vnet" {
-  name                = var.vnet_name
-  address_space       = ["${var.vnet_ip_address}/22"]
-  location            = data.azurerm_resource_group.shared_resource.location
-  resource_group_name = data.azurerm_resource_group.shared_resource.name
-}
-
-resource "azurerm_subnet" "application_gateway" {
-  name                 = "ApplicationGatewaySubnet"
-  resource_group_name  = data.azurerm_resource_group.shared_resource.name
-  virtual_network_name = var.vnet_name
-  address_prefixes     = ["${var.vnet_ip_address}/24"]
-}
-
-# Managed identity for app gateway
-resource "azurerm_user_assigned_identity" "app_gateway_dev" {
-  location            = data.azurerm_resource_group.shared_resource.location
-  name                = "agw-${var.application_name}-${var.shared_identifier}-${var.region_identifier}-01"
-  resource_group_name = data.azurerm_resource_group.shared_resource.name
-}
-
-
 locals {
   frontend_ip_configuration_name = "default"
   frontend_port_name             = "https"
