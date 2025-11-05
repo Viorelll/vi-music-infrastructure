@@ -1,4 +1,4 @@
-name: Provision - Shared - DEV
+name: 4 - Provision - Shared - Gateway
 
 # Create shared container registry
 # Create storage container for X-environment
