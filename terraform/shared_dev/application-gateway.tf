@@ -19,7 +19,7 @@ resource "azurerm_application_gateway" "dev" {
 
   identity {
     type         = "UserAssigned"
-    identity_ids = [azurerm_user_assigned_identity.app_gateway_dev.id]
+    identity_ids = [data.azurerm_user_assigned_identity.application_gateway.id]
   }
 
   sku {
@@ -30,7 +30,7 @@ resource "azurerm_application_gateway" "dev" {
 
   gateway_ip_configuration {
     name      = "default"
-    subnet_id = azurerm_subnet.application_gateway.id
+    subnet_id = data.azurerm_subnet.application_gateway.id
   }
 
   frontend_port {
@@ -40,7 +40,7 @@ resource "azurerm_application_gateway" "dev" {
 
   frontend_ip_configuration {
     name                 = local.frontend_ip_configuration_name
-    public_ip_address_id = azurerm_public_ip.application_gateway.id
+    public_ip_address_id = data.azurerm_public_ip.application_gateway.id
   }
 
   backend_address_pool {

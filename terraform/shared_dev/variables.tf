@@ -19,8 +19,11 @@ variable "dev_identifier" {
 }
 
 locals {
-  shared_resource_group_name  = "rg-${var.application_name}-${var.shared_identifier}-${var.region_identifier}-01"
-  shared_storage_account_name = "st${var.application_name}${var.shared_identifier}${var.region_identifier}02"
+  shared_resource_group_name   = "rg-${var.application_name}-${var.shared_identifier}-${var.region_identifier}-01"
+  shared_storage_account_name  = "st${var.application_name}${var.shared_identifier}${var.region_identifier}02"
+  shared_managed_identity_name = "agw-${var.application_name}-${var.shared_identifier}-${var.region_identifier}-01"
+  shared_vnet_name             = "vnet-${var.application_name}-${var.shared_identifier}-${var.region_identifier}-01"
+  shared_public_name           = "pip-${var.application_name}-${var.shared_identifier}-${var.region_identifier}-01"
 
   dev_resource_group_name            = "rg-${var.application_name}-${var.dev_identifier}-${var.region_identifier}-01"
   dev_container_app_environment_name = "cae-${var.application_name}-${var.dev_identifier}-${var.region_identifier}-01"
