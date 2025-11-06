@@ -74,7 +74,7 @@ resource "azurerm_application_gateway" "shared" {
     #3 uncomment
     host_name = data.azurerm_container_app.api_dev_01.ingress[0].fqdn
 
-    probe_name = local.api_dev_01.probe_name
+    #probe_name = local.api_dev_01.probe_name
   }
 
   # TODO: use https (commented below)
