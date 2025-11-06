@@ -44,23 +44,24 @@ resource "azurerm_application_gateway" "shared" {
   }
 
   backend_address_pool {
-    name = local.api_dev_01.backend_address_pool_name
-    # ip_addresses = [data.azurerm_container_app_environment.dev_01.static_ip_address]
+    name         = local.api_dev_01.backend_address_pool_name
+    ip_addresses = [data.azurerm_container_app_environment.dev_01.static_ip_address] #2 uncomment
   }
 
-  # probe {
-  #   host                = data.azurerm_container_app.api_dev_01.ingress[0].fqdn
-  #   name                = local.api_dev_01.probe_name
-  #   protocol            = "Https"
-  #   path                = "/health"
-  #   interval            = 30
-  #   timeout             = 30
-  #   unhealthy_threshold = 3
+  #1 uncomment
+  probe {
+    host                = data.azurerm_container_app.api_dev_01.ingress[0].fqdn
+    name                = local.api_dev_01.probe_name
+    protocol            = "Https"
+    path                = "/health"
+    interval            = 30
+    timeout             = 30
+    unhealthy_threshold = 3
 
-  #   match {
-  #     status_code = ["200"]
-  #   }
-  # }
+    match {
+      status_code = ["200"]
+    }
+  }
 
   backend_http_settings {
     name                  = local.api_dev_01.backend_http_settings_name
@@ -69,9 +70,11 @@ resource "azurerm_application_gateway" "shared" {
     port                  = 80     #443
     protocol              = "Http" #"Https"
     request_timeout       = 60
-    # host_name             = data.azurerm_container_app.api_dev_01.ingress[0].fqdn
 
-    # probe_name            = local.api_dev_01.probe_name
+    #3 uncomment
+    host_name = data.azurerm_container_app.api_dev_01.ingress[0].fqdn
+
+    probe_name = local.api_dev_01.probe_name
   }
 
   # TODO: use https (commented below)
