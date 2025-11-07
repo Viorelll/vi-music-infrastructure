@@ -1,7 +1,7 @@
 locals {
   frontend_ip_configuration_name = "default"
-  frontend_port_name             = "https"
-  frontend_port                  = 443
+  frontend_port_name             = "http" #"https"
+  frontend_port                  = 80     #443
 
   api_dev_01 = {
     probe_name                 = "${var.application_name}-api-${var.dev_identifier}-${var.region_identifier}-01"
@@ -67,8 +67,8 @@ resource "azurerm_application_gateway" "shared" {
     name                  = local.api_dev_01.backend_http_settings_name
     cookie_based_affinity = "Disabled"
     path                  = "/"
-    port                  = 443
-    protocol              = "Https"
+    port                  = 80     #443
+    protocol              = "Http" #"Https"
     request_timeout       = 60
 
     #3 uncomment
@@ -83,7 +83,7 @@ resource "azurerm_application_gateway" "shared" {
     name                           = local.api_dev_01.http_listener_name
     frontend_ip_configuration_name = local.frontend_ip_configuration_name
     frontend_port_name             = local.frontend_port_name
-    protocol                       = "Https"
+    protocol                       = "Http" #"Https"
     //ssl_certificate_name           = local.api_dev_01.ssl_certificate_name
     //host_name                      = ""
   }
