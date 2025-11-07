@@ -49,19 +49,19 @@ resource "azurerm_application_gateway" "shared" {
   }
 
   #1 uncomment
-  # probe {
-  #   host                = data.azurerm_container_app.api_dev_01.ingress[0].fqdn
-  #   name                = local.api_dev_01.probe_name
-  #   protocol            = "Https"
-  #   path                = "/health"
-  #   interval            = 30
-  #   timeout             = 30
-  #   unhealthy_threshold = 3
+  probe {
+    host                = data.azurerm_container_app.api_dev_01.ingress[0].fqdn
+    name                = local.api_dev_01.probe_name
+    protocol            = "Https"
+    path                = "/health"
+    interval            = 30
+    timeout             = 30
+    unhealthy_threshold = 3
 
-  #   match {
-  #     status_code = ["200"]
-  #   }
-  # }
+    match {
+      status_code = ["200"]
+    }
+  }
 
   backend_http_settings {
     name                  = local.api_dev_01.backend_http_settings_name
@@ -74,7 +74,7 @@ resource "azurerm_application_gateway" "shared" {
     #3 uncomment
     host_name = data.azurerm_container_app.api_dev_01.ingress[0].fqdn
 
-    #probe_name = local.api_dev_01.probe_name
+    probe_name = local.api_dev_01.probe_name
   }
 
   # TODO: use https (commented below)
