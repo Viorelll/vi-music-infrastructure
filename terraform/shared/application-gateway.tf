@@ -52,8 +52,8 @@ resource "azurerm_application_gateway" "shared" {
   probe {
     host                = data.azurerm_container_app.api_dev_01.ingress[0].fqdn
     name                = local.api_dev_01.probe_name
-    protocol            = "Https"
-    path                = "/health"
+    protocol            = "Http" #"Https"
+    path                = "/api"
     interval            = 30
     timeout             = 30
     unhealthy_threshold = 3
