@@ -29,7 +29,7 @@ resource "azurerm_key_vault_secret" "sqldb_connection_string_viqupapp" {
 }
 
 resource "azurerm_key_vault_certificate" "https_cert" {
-  name         = "generated-cert"
+  name         = "${var.application_name}-api-${var.environment_name}-${var.region_identifier}-01"
   key_vault_id = azurerm_key_vault.this.id
 
   certificate_policy {

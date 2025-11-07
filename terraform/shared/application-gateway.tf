@@ -1,7 +1,7 @@
 locals {
   frontend_ip_configuration_name = "default"
-  frontend_port_name             = "http" #"https"
-  frontend_port                  = 80     #443
+  frontend_port_name             = "https"
+  frontend_port                  = 443
 
   api_dev_01 = {
     probe_name                 = "${var.application_name}-api-${var.dev_identifier}-${var.region_identifier}-01"
@@ -44,35 +44,35 @@ resource "azurerm_application_gateway" "shared" {
   }
 
   backend_address_pool {
-    name         = local.api_dev_01.backend_address_pool_name
-    ip_addresses = [data.azurerm_container_app_environment.dev_01.static_ip_address] #2 uncomment
+    name = local.api_dev_01.backend_address_pool_name
+    # ip_addresses = [data.azurerm_container_app_environment.dev_01.static_ip_address] #2 uncomment
   }
 
   #1 uncomment
-  probe {
-    host                = data.azurerm_container_app.api_dev_01.ingress[0].fqdn
-    name                = local.api_dev_01.probe_name
-    protocol            = "Http" #"Https"
-    path                = "/api"
-    interval            = 30
-    timeout             = 30
-    unhealthy_threshold = 3
+  # probe {
+  #   host                = data.azurerm_container_app.api_dev_01.ingress[0].fqdn
+  #   name                = local.api_dev_01.probe_name
+  #   protocol            = "Https"
+  #   path                = "/api"
+  #   interval            = 30
+  #   timeout             = 30
+  #   unhealthy_threshold = 3
 
-    match {
-      status_code = ["200"]
-    }
-  }
+  #   match {
+  #     status_code = ["200"]
+  #   }
+  # }
 
   backend_http_settings {
     name                  = local.api_dev_01.backend_http_settings_name
     cookie_based_affinity = "Disabled"
     path                  = "/"
-    port                  = 80     #443
-    protocol              = "Http" #"Https"
+    port                  = 443
+    protocol              = "Https"
     request_timeout       = 60
 
     #3 uncomment
-    host_name = data.azurerm_container_app.api_dev_01.ingress[0].fqdn
+    # host_name = data.azurerm_container_app.api_dev_01.ingress[0].fqdn
 
     probe_name = local.api_dev_01.probe_name
   }
@@ -83,7 +83,7 @@ resource "azurerm_application_gateway" "shared" {
     name                           = local.api_dev_01.http_listener_name
     frontend_ip_configuration_name = local.frontend_ip_configuration_name
     frontend_port_name             = local.frontend_port_name
-    protocol                       = "Http" #"Https"
+    protocol                       = "Https"
     //ssl_certificate_name           = local.api_dev_01.ssl_certificate_name
     //host_name                      = ""
   }
@@ -97,8 +97,8 @@ resource "azurerm_application_gateway" "shared" {
     priority                   = 1
   }
 
-  # ssl_certificate {
-  #   name                = local.api_dev_01.ssl_certificate_name
-  #   key_vault_secret_id = data.azurerm_key_vault_secret.monolith_backend_api_certificate_dev.versionless_id
-  # }
+  ssl_certificate {
+    name                = local.api_dev_01.ssl_certificate_name
+    key_vault_secret_id = data.azurerm_key_vault_certificate.https_cert.versionless_id
+  }
 }
