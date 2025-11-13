@@ -18,14 +18,17 @@ variable "dev_identifier" {
   default = "dev"
 }
 
-locals {
-  shared_resource_group_name   = "rg-${var.application_name}-${var.shared_identifier}-${var.region_identifier}-01"
-  shared_storage_account_name  = "st${var.application_name}${var.shared_identifier}${var.region_identifier}02"
-  shared_managed_identity_name = "agw-${var.application_name}-${var.shared_identifier}-${var.region_identifier}-01"
-  shared_vnet_name             = "vnet-${var.application_name}-${var.shared_identifier}-${var.region_identifier}-01"
-  shared_public_name           = "pip-${var.application_name}-${var.shared_identifier}-${var.region_identifier}-01"
+variable "resource_number" {
+  type    = string
+  default = "03"
+}
 
-  dev_resource_group_name            = "rg-${var.application_name}-${var.dev_identifier}-${var.region_identifier}-01"
-  dev_container_app_environment_name = "cae-${var.application_name}-${var.dev_identifier}-${var.region_identifier}-01"
-  dev_container_app_name             = "ca-${var.application_name}-api-${var.dev_identifier}-${var.region_identifier}-01"
+locals {
+  shared_resource_group_name   = "rg-${var.application_name}-${var.shared_identifier}-${var.region_identifier}-${var.resource_number}"
+  shared_managed_identity_name = "agw-${var.application_name}-${var.shared_identifier}-${var.region_identifier}-${var.resource_number}"
+
+  dev_resource_group_name            = "rg-${var.application_name}-${var.dev_identifier}-${var.region_identifier}-${var.resource_number}"
+  dev_container_app_environment_name = "cae-${var.application_name}-${var.dev_identifier}-${var.region_identifier}-${var.resource_number}"
+  dev_container_app_name             = "ca-${var.application_name}-api-${var.dev_identifier}-${var.region_identifier}-${var.resource_number}"
+  dev_ssl_cert_name                  = "${var.application_name}-api-${var.dev_identifier}-${var.region_identifier}-${var.resource_number}"
 }

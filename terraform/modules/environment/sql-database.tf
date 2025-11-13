@@ -3,7 +3,7 @@ locals {
 }
 
 resource "azurerm_postgresql_flexible_server" "server" {
-  name                   = "sql-${var.application_name}-${var.environment_name}-${var.region_identifier}-01"
+  name                   = "sql-${var.application_name}-${var.environment_name}-${var.region_identifier}-${var.resource_number}"
   resource_group_name    = data.azurerm_resource_group.this.name
   location               = var.region_full_identifier
   administrator_login    = var.sqldb_admin_username
@@ -24,7 +24,7 @@ resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_azure_service
 }
 
 resource "azurerm_postgresql_flexible_server_database" "db" {
-  name      = "sqldb-${var.application_name}-${var.environment_name}-${var.region_identifier}-01"
+  name      = "sqldb-${var.application_name}-${var.environment_name}-${var.region_identifier}-${var.resource_number}"
   server_id = azurerm_postgresql_flexible_server.server.id
   collation = "en_US.utf8"
   charset   = "utf8"

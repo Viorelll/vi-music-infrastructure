@@ -85,6 +85,10 @@ variable "sqldb_min_capacity" {
   type = number
 }
 
+variable "resource_number" {
+  type = string
+}
+
 variable "app_config_keys" {
   type = list(object({
     key                 = string

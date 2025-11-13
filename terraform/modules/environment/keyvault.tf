@@ -1,9 +1,12 @@
 resource "azurerm_key_vault" "this" {
-  name                = "kv${var.application_name}${var.environment_name}${var.region_identifier}"
+  name                = "kv${var.application_name}${var.environment_name}${var.region_identifier}${var.resource_number}"
   location            = data.azurerm_resource_group.this.location
   resource_group_name = data.azurerm_resource_group.this.name
   tenant_id           = data.azurerm_client_config.current.tenant_id
   sku_name            = "standard"
+
+  #Enable Azure RBAC authorization instead of access policies
+  rbac_authorization_enabled = true
 }
 
 resource "random_password" "sqldb_admin_password" {
@@ -29,7 +32,7 @@ resource "azurerm_key_vault_secret" "sqldb_connection_string_viqupapp" {
 }
 
 resource "azurerm_key_vault_certificate" "https_cert" {
-  name         = "${var.application_name}-api-${var.environment_name}-${var.region_identifier}-01"
+  name         = "${var.application_name}-api-${var.environment_name}-${var.region_identifier}-${var.resource_number}"
   key_vault_id = azurerm_key_vault.this.id
 
   certificate_policy {

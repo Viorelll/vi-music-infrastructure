@@ -1,5 +1,5 @@
 resource "azurerm_app_configuration" "this" {
-  name                = "appcs-${var.application_name}-${var.environment_name}-${var.region_identifier}-01"
+  name                = "appcs-${var.application_name}-${var.environment_name}-${var.region_identifier}-${var.resource_number}"
   resource_group_name = data.azurerm_resource_group.this.name
   location            = data.azurerm_resource_group.this.location
   sku                 = "standard"
@@ -27,6 +27,6 @@ resource "azurerm_app_configuration_key" "frontend_origin" {
   configuration_store_id = azurerm_app_configuration.this.id
   key                    = "AllowUIOrigin"
   value                  = azurerm_static_web_app.vimusic_ui.default_host_name
-  type                   = "string"
+  type                   = "kv"
 }
 

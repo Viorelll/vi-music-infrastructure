@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "sharedstorage" {
-  name                     = "st${var.application_name}${var.shared_identifier}${var.region_identifier}02"
+  name                     = "st${var.application_name}${var.shared_identifier}${var.region_identifier}${var.resource_number}"
   resource_group_name      = data.azurerm_resource_group.this.name
   location                 = data.azurerm_resource_group.this.location
   account_tier             = "Standard"
@@ -33,6 +33,6 @@ resource "azurerm_storage_management_policy" "delete_old_versions" {
 
 resource "azurerm_storage_container" "tfstateshared" {
   name                  = "tfstate${var.shared_identifier}"
-  storage_account_name  = azurerm_storage_account.sharedstorage.name
+  storage_account_id    = azurerm_storage_account.sharedstorage.id
   container_access_type = "private"
 }

@@ -13,6 +13,11 @@ variable "shared_identifier" {
   default = "shared"
 }
 
+variable "resource_number" {
+  type    = string
+  default = "03"
+}
+
 locals {
-  shared_resource_group_name = "rg-${var.application_name}-${var.shared_identifier}-${var.region_identifier}-01"
+  shared_resource_group_name = "rg-${var.application_name}-${var.shared_identifier}-${var.region_identifier}-${var.resource_number}"
 }
