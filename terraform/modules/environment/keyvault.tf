@@ -35,6 +35,8 @@ resource "azurerm_key_vault_certificate" "https_cert" {
   name         = "${var.application_name}-api-${var.environment_name}-${var.region_identifier}-${var.resource_number}"
   key_vault_id = azurerm_key_vault.this.id
 
+  depends_on = [azurerm_role_assignment.terraform_keyvault_admin] #wait until the role for creating new secret will be assigned
+
   certificate_policy {
     issuer_parameters {
       name = "Self"
