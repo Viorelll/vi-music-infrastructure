@@ -13,6 +13,11 @@ variable "shared_identifier" {
   default = "shared"
 }
 
+variable "dev_identifier" {
+  type    = string
+  default = "dev"
+}
+
 variable "resource_number" {
   type    = string
   default = "03"
