@@ -20,7 +20,7 @@ variable "dev_identifier" {
 
 variable "vnet_name" {
   type    = string
-  default = "vnet-vimusic-shared-plc-03"
+  default = "vnet-vimusic-shared-plc-04"
 }
 
 variable "vnet_ip_address" {
@@ -30,7 +30,7 @@ variable "vnet_ip_address" {
 
 variable "resource_number" {
   type    = string
-  default = "03"
+  default = "04"
 }
 
 locals {

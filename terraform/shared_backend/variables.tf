@@ -20,7 +20,7 @@ variable "dev_identifier" {
 
 variable "resource_number" {
   type    = string
-  default = "03"
+  default = "04"
 }
 
 locals {

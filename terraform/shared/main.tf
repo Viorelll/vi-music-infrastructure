@@ -6,8 +6,8 @@ terraform {
     }
   }
   backend "azurerm" {
-    resource_group_name  = "rg-vimusic-shared-plc-03"
-    storage_account_name = "stvimusicsharedplc03"
+    resource_group_name  = "rg-vimusic-shared-plc-04"
+    storage_account_name = "stvimusicsharedplc04"
     container_name       = "tfstateshared"
     key                  = "terraform.tfstate"
   }
