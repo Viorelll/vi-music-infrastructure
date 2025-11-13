@@ -28,13 +28,13 @@ data "azurerm_storage_account" "shared_storage" {
 #   resource_group_name = local.dev_resource_group_name
 # }
 
-data "azurerm_key_vault_secret" "dev_backend_api_certificate" {
-  provider     = azurerm.dev_subscription
-  name         = local.dev_ssl_cert_name
-  key_vault_id = data.azurerm_key_vault.dev_certificates.id
-}
+# data "azurerm_key_vault_secret" "dev_backend_api_certificate" {
+#   provider     = azurerm.dev_subscription
+#   name         = local.dev_ssl_cert_name
+#   key_vault_id = data.azurerm_key_vault.dev_certificates.id
+# }
 
-data "azurerm_static_web_app" "dev_vimusic_ui" {
-  name                = "stapp-${var.application_name}-${var.dev_identifier}-${var.region_identifier}"
-  resource_group_name = local.dev_resource_group_name
-}
+# data "azurerm_static_web_app" "dev_vimusic_ui" {
+#   name                = "stapp-${var.application_name}-${var.dev_identifier}-${var.region_identifier}"
+#   resource_group_name = local.dev_resource_group_name
+# }
