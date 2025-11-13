@@ -19,7 +19,7 @@ resource "azurerm_application_gateway" "shared" {
 
   identity {
     type         = "UserAssigned"
-    identity_ids = [azurerm_user_assigned_identity.app_gateway_shared.id]
+    identity_ids = [data.azurerm_user_assigned_identity.application_gateway.id]
   }
 
   sku {

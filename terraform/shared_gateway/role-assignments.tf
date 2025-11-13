@@ -5,7 +5,7 @@
 ## Set roles for Shared Managed Identity (UAI)
 #Access for gateway to read keyvault ssl certficate via shared UAI
 resource "azurerm_role_assignment" "shared_uai" {
-  scope                = data.azurerm_key_vault.dev_certificates
+  scope                = data.azurerm_key_vault.dev_certificates.id
   role_definition_name = "Key Vault Certificate User"
   principal_id         = data.azurerm_user_assigned_identity.application_gateway.principal_id
 }
