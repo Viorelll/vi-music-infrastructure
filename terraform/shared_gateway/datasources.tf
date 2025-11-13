@@ -1,3 +1,4 @@
+# SHARED INFRA IMPORT
 data "azurerm_resource_group" "shared_resource" {
   name = local.shared_resource_group_name
 }
@@ -7,7 +8,18 @@ data "azurerm_user_assigned_identity" "application_gateway" {
   resource_group_name = local.shared_resource_group_name
 }
 
+data "azurerm_public_ip" "shared_public_ip" {
+  name                = "pip-${var.application_name}-${var.shared_identifier}-${var.region_identifier}-${var.resource_number}"
+  resource_group_name = local.shared_resource_group_name
+}
 
+data "azurerm_subnet" "shared_subnet" {
+  name                 = "ApplicationGatewaySubnet"
+  virtual_network_name = "vnet-${var.application_name}-${var.shared_identifier}-${var.region_identifier}-${var.resource_number}"
+  resource_group_name  = local.shared_resource_group_name
+}
+
+# DEV INFRA IMPORT
 data "azurerm_container_app_environment" "dev" {
   provider            = azurerm.dev_subscription
   resource_group_name = local.dev_resource_group_name
@@ -36,3 +48,5 @@ data "azurerm_static_web_app" "dev_vimusic_ui" {
   name                = "stapp-${var.application_name}-${var.dev_identifier}-${var.region_identifier}"
   resource_group_name = local.dev_resource_group_name
 }
+
+

@@ -30,7 +30,7 @@ resource "azurerm_application_gateway" "shared" {
 
   gateway_ip_configuration {
     name      = "default"
-    subnet_id = azurerm_subnet.application_gateway.id
+    subnet_id = data.azurerm_subnet.shared_subnet.id
   }
 
   frontend_port {
@@ -40,7 +40,7 @@ resource "azurerm_application_gateway" "shared" {
 
   frontend_ip_configuration {
     name                 = local.frontend_ip_configuration_name
-    public_ip_address_id = azurerm_public_ip.application_gateway.id
+    public_ip_address_id = data.azurerm_public_ip.shared_public_ip.id
   }
 
   backend_address_pool {
