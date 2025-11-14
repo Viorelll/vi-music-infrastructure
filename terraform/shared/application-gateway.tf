@@ -98,7 +98,7 @@ resource "azurerm_application_gateway" "shared" {
     host                = data.azurerm_container_app.api_dev.ingress[0].fqdn
     name                = local.api_dev.probe_name
     protocol            = "Https"
-    path                = "/api"
+    path                = "/"
     interval            = 30
     timeout             = 30
     unhealthy_threshold = 3
@@ -127,7 +127,7 @@ resource "azurerm_application_gateway" "shared" {
     frontend_port_name             = local.frontend_port_name
     protocol                       = "Https"
     ssl_certificate_name           = local.api_dev.ssl_certificate_name
-    host_name                      = data.azurerm_static_web_app.dev_vimusic_ui.default_host_name
+    host_name                      = azurerm_public_ip.application_gateway.fqdn
   }
 
   request_routing_rule {
